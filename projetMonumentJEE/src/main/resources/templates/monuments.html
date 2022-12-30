@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">  <!-- nom de la librairie thymleaf -->
+
+<head>
+	<meta charset="utf-8">  <!-- pour utiliser les caractères accentiées -->
+	<title>Monument</title>
+	<link rel="stylesheet" type="text/css" 
+	href="../static/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}"
+	/>
+	<link rel="stylesheet" type="text/css" 
+	href="../static/css/style.css"
+	th:href="@{/css/style.css}"
+	/>  
+</head>
+
+<body>
+	<div>
+		<div th:replace="fragments :: menu"></div></br>
+	</div>
+	<div class="contenu"> <!-- style="padding-top:40px;" -->
+		 <div class="container"><br>
+			<form th:action="@{monuments}" method="get"> 
+				<label>Mot clé:</label>
+				<input type="text" name="mc" th:value="${mc}"/>
+				<button class="btn btn-primary">Chercher</button>
+			</form>
+		</div></br>
+		<div class="container" >
+			<h3>Liste des monuments </h3><br></br>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Propriétaire</th>
+						<th>TypeM</th>
+						<th>Afficher</th>
+						<th>Modifier</th>
+						<th>Supprimer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="m:${listeMonuments}">
+						<td th:text="${m.nom}"></td>
+						<td th:text="${m.proprietaire}"></td>
+						<td th:text="${m.typeM}"></td>
+						<td><a th:href="@{afficherMonument(nom=${m.nom})}" class="btn btn-primary">Afficher</td>
+						<td><a th:href="@{updateMonument(nom=${m.nom})}" class="btn btn-warning">Modifier</a></td>
+						<td><a th:href="@{deleteMonument(nom=${m.nom},page=${pageCourante},size=${size},mc=${mc})}" class="btn btn-danger">Supprimer</a></td>
+					</tr>
+				</tbody>		
+			</table>
+			<div>
+				<ul class="nav nav-pills nav-justified">
+					<li th:class="${pageCourante}==${status.index}?'active':''"class="nav-item" th:each="page,status:${pages}" >
+						<a class="nav-link" th:href="@{monuments(page=${status.index},size=${size},mc=${mc})}" th:text="${status.index}" > </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div></br>
+	
+<footer th:replace="fragments :: footer"></footer>
+
+	
+</body>
+
+</html>

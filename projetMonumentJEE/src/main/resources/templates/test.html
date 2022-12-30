@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">  <!-- nom de la librairie thymleaf -->
+
+
+<head th:replace="fragments :: html_head">
+<meta charset="utf-8"/>
+</head>
+
+
+<body>
+
+<div th:replace="fragments :: menu"></div></br>
+
+	
+	<div class="container">
+		
+		<div>
+	 	<div class="card" style="width: 30rem;">
+	 		<div class="card-header">Ajouter un monument</div>
+	 			<div class="card-body">
+	 				<form th:action="@{save}" method="post">
+		 				<div class="form-group">
+		 					<label class="control-label">Geohash:</label>
+		 					<input class="form-control" type="text" name="geohash" 
+		 					th:value="${monument.geohash}"/>
+		 					<span th:errors="${monument.geohash}"></span>
+		 				</div>
+		 				<div class="form-group">
+		 					<label class="control-label">Nom:</label>
+		 					<input class="form-control" type="text" name="nom" 
+		 					th:value="${monument.nom}"/>
+		 					<span th:errors="${monument.nom}"></span>
+		 				</div>
+		 				<div class="form-group">
+		 					<label class="control-label">Propriétaire:</label>
+		 					<input class="form-control" type="text" name="proprietaire" 
+									th:value="${monument.proprietaire}"/>
+									<span th:errors="${monument.proprietaire}"></span>
+		 				</div>
+		 				<div class="form-group">
+		 					<label class="control-label">Type Monument:</label>
+		 					<input class="form-control" type="text" name="typeM" 
+		 					th:value="${monument.typeM}"/>
+		 					<span th:errors="${monument.typeM}"></span>
+		 				</div>
+		 				<div class="form-group">
+		 					<label class="control-label">Longitude:</label>
+		 					<input class="form-control" type="text" name="longitude" 
+		 					th:value="${monument.longitude}"/>
+		 					<span th:errors="${monument.longitude}"></span>
+		 				</div>
+		 				<div class="form-group">
+		 					<label class="control-label">Latitude:</label>
+		 					<input class="form-control" type="text" name="latitude" 
+		 					th:value="${monument.latitude}"/>
+		 					<span th:errors="${monument.latitude}"></span>
+		 				</div>
+		 				
+		 				<div>
+		 					<button type="submit" class="btn btn-primary">Ajouter </button>
+		 				</div>
+		 				
+		 			</form>
+		 			
+	 			</div>
+	 			</div>
+	</div>
+	</div>	
+</body>
+</html>
